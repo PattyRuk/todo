@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { useReducer, useEffect } from 'react';
+import Form from './components/Form';
+import Items from './components/Items';
+import Reducer from './components/Reducer';
 
-function App() {
+export default function App() {
+  const [tasks, dispatch] = useReducer(Reducer, [], () => {
+    const localData = localStorage.getItem('tasks');
+    return localData ? JSON.parse(localData) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="task-container">
+      <h1>Task Manager Dashboard</h1>
+      
+      <Form dispatch={dispatch} />
+
+      <section className="gallery-section">
+        <div className="gallery-grid">
+          {tasks.map(task => (
+            <Items 
+              key={task.id} 
+              task={task} 
+              dispatch={dispatch} 
+            />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
-
-export default App;
