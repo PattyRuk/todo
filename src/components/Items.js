@@ -30,7 +30,6 @@ export default function Items({ task, dispatch }) {
       </div>
 
       <div className="task-actions">
-        {/* Complete Action Icon */}
         <button 
           onClick={() => dispatch({ type: 'COMPLETE', payload: task.id })} 
           className="icon-btn"
@@ -39,12 +38,10 @@ export default function Items({ task, dispatch }) {
           {task.completed ? <FaUndo color="#6c757d" size={18} /> : <FaCheck color="#1a8e06" size={18} />}
         </button>
 
-        {/* Update Action Icon */}
         <button onClick={() => setIsEditing(!isEditing)} className="icon-btn" title="Edit Task">
           <FaEdit color="#007bff" size={18} />
         </button>
 
-        {/* Delete Action Icon */}
         <button onClick={() => dispatch({ type: 'DELETE', payload: task.id })} className="icon-btn" title="Delete Task">
           <FaTrash color="#dc3545" size={18} />
         </button>

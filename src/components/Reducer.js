@@ -13,7 +13,7 @@ function Reducer(state, action) {
     case 'UPDATE':
       return state.map(task => 
         task.id === action.payload.id 
-          ? { ...task, text: action.payload.text, date: new Date().toLocaleString() } // Preserves original creation date
+          ? { ...task, text: action.payload.text, date: new Date().toLocaleString() } 
           : task
       );
     default:
